@@ -1,0 +1,266 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 17,
+  "summary": "A store website for 'The Gaming Company™' with a left-side navigation (Games, Controllers, Sponsors, Accessories), product listings, and an admin panel for managing sponsors, consoles, and other store content. The sidebar navigation buttons should appear on the side, the admin panel link should be at the bottom of the sidebar as a gear (⚙️) icon, and the brand name must be displayed as 'The Gaming Company™' (not 'Gaming Store').",
+  "architectural_notes": [
+    "Project name: The Gaming Company™ — use trademark symbol in branding/header",
+    "Store layout: left sidebar navigation, main content area for products",
+    "Admin panel required for content management (sponsors, consoles, etc.)",
+    "Admin panel is password-protected with hardcoded password '6280'",
+    "Auto-populate product details (image, description) when a known console/game name is entered in admin panel",
+    "Admin panel link must appear at the bottom of the left sidebar as a gear icon (⚙️), not in the header"
+  ],
+  "known_issues": [
+    "Nothing is loading on the site — user reported blank/broken page",
+    "Sidebar navigation buttons not functional — user reported buttons don't work",
+    "Admin panel form not scrollable — user cannot reach the 'add' button/fields",
+    "Adding a product via the admin panel does not persist/display on the website — product save is broken"
+  ],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-create-a-full-store-website-layout-for-the-gaming-company-with-a-persistent-left-side-navigation-sidebar-containing-buttons-links-for-games-controllers-sponsors-accessories-the-brand-name-the-gaming-company-must-appear-prominently-in-the-header-with-the-trademark-symbol",
+      "title": "Create a full store website layout for 'The Gaming Company™' with a persistent left-side navigation sidebar containing buttons/links for: Games, Controllers, Sponsors, Accessories. The brand name 'The Gaming Company™' must appear prominently in the header with the trademark symbol (™).",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-product-catalog-with-separate-sections-for-games-controllers-consoles-sponsors-and-accessories-each-product-item-should-display-a-name-image-placeholder-price-and-a-brief-description-products-should-be-stored-in-the-backend-and-fetched-for-display",
+      "title": "Implement a product catalog with separate sections for Games, Controllers, Consoles, Sponsors, and Accessories. Each product/item should display a name, image placeholder, price, and a brief description. Products should be stored in the backend and fetched for display.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-shopping-cart-feature-allowing-users-to-add-products-to-a-cart-view-cart-contents-see-a-total-price-and-proceed-to-a-checkout-summary-page",
+      "title": "Implement a shopping cart feature allowing users to add products to a cart, view cart contents, see a total price, and proceed to a checkout summary page.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-protected-admin-panel-page-accessible-via-a-link-in-the-header-or-sidebar-the-admin-panel-must-allow-an-admin-to-add-new-products-games-controllers-consoles-accessories-with-name-price-description-and-image-url-add-and-manage-sponsors-with-name-logo-url-and-description-edit-and-delete-any-existing-product-or-sponsor-all-changes-must-persist-in-the-backend",
+      "title": "Create a protected Admin Panel page accessible via a link in the header or sidebar. The admin panel must allow an admin to: add new products (Games, Controllers, Consoles, Accessories) with name, price, description, and image URL; add and manage Sponsors with name, logo URL, and description; edit and delete any existing product or sponsor. All changes must persist in the backend.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-bold-gaming-inspired-visual-theme-throughout-the-entire-site-dark-background-near-black-vibrant-accent-color-e-g-electric-red-or-neon-green-sharp-modern-typography-glowing-button-effects-and-a-grid-based-product-card-layout-the-theme-must-be-consistent-across-the-storefront-sidebar-admin-panel-and-cart",
+      "title": "Apply a bold, gaming-inspired visual theme throughout the entire site: dark background (near-black), vibrant accent color (e.g., electric red or neon green), sharp modern typography, glowing button effects, and a grid-based product card layout. The theme must be consistent across the storefront, sidebar, admin panel, and cart.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-password-protection-to-the-admin-panel-page-before-displaying-any-admin-content-show-a-password-entry-screen-with-a-numeric-input-field-and-a-submit-button-only-grant-access-when-the-user-enters-the-correct-password-6280-if-the-password-is-incorrect-display-an-error-message-the-locked-unlocked-state-should-persist-for-the-current-browser-session-e-g-using-react-state-or-sessionstorage-the-password-check-must-be-handled-entirely-on-the-frontend-do-not-store-or-validate-the-password-in-the-backend",
+      "title": "Add password protection to the Admin Panel page. Before displaying any admin content, show a password entry screen with a numeric input field and a submit button. Only grant access when the user enters the correct password '6280'. If the password is incorrect, display an error message. The locked/unlocked state should persist for the current browser session (e.g., using React state or sessionStorage). The password check must be handled entirely on the frontend — do not store or validate the password in the backend.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-smart-auto-fill-feature-in-the-admin-panel-s-product-form-productform-tsx-when-the-user-types-a-well-known-console-or-game-name-into-the-product-name-field-e-g-nintendo-switch-playstation-5-xbox-series-x-game-boy-nintendo-64-mario-kart-call-of-duty-minecraft-fifa-fortnite-etc-automatically-populate-the-image-url-description-and-category-fields-with-relevant-accurate-pre-defined-data-maintain-a-hardcoded-lookup-table-on-the-frontend-mapping-popular-product-names-case-insensitive-to-their-corresponding-image-url-using-a-real-publicly-accessible-image-such-as-from-wikipedia-commons-or-official-brand-press-assets-a-short-description-and-the-appropriate-category-if-the-name-does-not-match-any-known-entry-leave-the-fields-as-is-and-allow-manual-entry-display-a-subtle-visual-indicator-e-g-a-badge-or-highlight-when-auto-fill-has-been-applied-so-the-user-knows-the-fields-were-populated-automatically",
+      "title": "Implement a smart auto-fill feature in the Admin Panel's product form (ProductForm.tsx). When the user types a well-known console or game name into the product name field (e.g., 'Nintendo Switch', 'PlayStation 5', 'Xbox Series X', 'Game Boy', 'Nintendo 64', 'Mario Kart', 'Call of Duty', 'Minecraft', 'FIFA', 'Fortnite', etc.), automatically populate the image URL, description, and category fields with relevant, accurate pre-defined data. Maintain a hardcoded lookup table on the frontend mapping popular product names (case-insensitive) to their corresponding image URL (using a real, publicly accessible image such as from Wikipedia Commons or official brand press assets), a short description, and the appropriate category. If the name does not match any known entry, leave the fields as-is and allow manual entry. Display a subtle visual indicator (e.g., a badge or highlight) when auto-fill has been applied so the user knows the fields were populated automatically.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-diagnose-and-fix-the-root-cause-of-the-site-failing-to-load-audit-the-frontend-entry-point-app-tsx-main-tsx-storepage-tsx-and-backend-actor-calls-useactor-ts-usequeries-ts-for-runtime-errors-failed-imports-broken-async-initialization-or-unhandled-promise-rejections-that-would-cause-a-blank-page-ensure-the-store-page-renders-its-product-grid-or-a-graceful-empty-loading-state-on-first-visit-without-requiring-any-user-action",
+      "title": "Diagnose and fix the root cause of the site failing to load. Audit the frontend entry point (App.tsx, main.tsx, StorePage.tsx) and backend actor calls (useActor.ts, useQueries.ts) for runtime errors, failed imports, broken async initialization, or unhandled promise rejections that would cause a blank page. Ensure the store page renders its product grid (or a graceful empty/loading state) on first visit without requiring any user action.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-app-tsx-restructure-the-sidebar-so-that-the-navigation-buttons-games-controllers-sponsors-accessories-are-stacked-vertically-along-the-left-side-of-the-sidebar-each-button-should-be-displayed-as-a-full-width-sidebar-item-with-an-icon-and-label-consistent-with-the-existing-gaming-theme",
+      "title": "In App.tsx, restructure the sidebar so that the navigation buttons (Games, Controllers, Sponsors, Accessories) are stacked vertically along the left side of the sidebar. Each button should be displayed as a full-width sidebar item with an icon and label, consistent with the existing gaming theme.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-move-the-admin-panel-link-to-the-very-bottom-of-the-left-side-navigation-sidebar-display-it-as-a-gear-icon-with-a-small-admin-label-beneath-or-beside-it-visually-separated-from-the-main-nav-items-e-g-with-a-divider-or-extra-spacing-remove-any-existing-admin-link-from-the-header-or-other-locations",
+      "title": "Move the Admin Panel link to the very bottom of the left-side navigation sidebar. Display it as a gear icon (⚙️) with a small 'Admin' label beneath or beside it, visually separated from the main nav items (e.g., with a divider or extra spacing). Remove any existing admin link from the header or other locations.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-correct-all-occurrences-of-gaming-store-or-any-incorrect-brand-name-variant-throughout-the-frontend-including-the-header-page-titles-sidebar-and-any-static-text-to-read-the-gaming-company-ensure-the-trademark-symbol-always-follows-the-brand-name-exactly",
+      "title": "Correct all occurrences of 'Gaming Store' (or any incorrect brand name variant) throughout the frontend — including the header, page titles, sidebar, and any static text — to read 'The Gaming Company™'. Ensure the trademark symbol (™) always follows the brand name exactly.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-app-tsx-make-the-sidebar-navigation-buttons-games-controllers-sponsors-accessories-fully-functional-clicking-each-button-must-update-the-active-view-category-state-so-that-storepage-tsx-filters-and-displays-the-correct-product-section-the-active-button-should-have-a-distinct-highlighted-active-style-consistent-with-the-gaming-theme",
+      "title": "In App.tsx, make the sidebar navigation buttons (Games, Controllers, Sponsors, Accessories) fully functional. Clicking each button must update the active view/category state so that StorePage.tsx filters and displays the correct product section. The active button should have a distinct highlighted/active style consistent with the gaming theme.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-admin-panel-adminpage-tsx-is-reachable-by-clicking-the-gear-icon-at-the-bottom-of-the-sidebar-in-app-tsx-the-gear-icon-click-handler-must-set-the-current-view-to-admin-so-adminpage-tsx-is-rendered-confirm-the-password-gate-pin-6280-is-shown-first-and-after-correct-entry-the-full-admin-dashboard-with-product-and-sponsor-management-tabs-is-displayed",
+      "title": "Ensure the Admin Panel (AdminPage.tsx) is reachable by clicking the gear icon at the bottom of the sidebar in App.tsx. The gear icon click handler must set the current view to 'admin' so AdminPage.tsx is rendered. Confirm the password gate (PIN '6280') is shown first, and after correct entry the full admin dashboard with product and sponsor management tabs is displayed.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-adminpage-tsx-ensure-the-admin-panel-page-and-its-product-sponsor-forms-are-fully-scrollable-the-page-content-area-and-any-dialog-modal-forms-including-productform-and-sponsorform-must-allow-vertical-scrolling-so-the-user-can-reach-all-input-fields-and-the-submit-save-button-regardless-of-screen-height-remove-any-css-that-clips-or-hides-overflow-on-the-admin-page-container-or-form-dialogs",
+      "title": "In AdminPage.tsx, ensure the admin panel page and its product/sponsor forms are fully scrollable. The page content area and any dialog/modal forms (including ProductForm and SponsorForm) must allow vertical scrolling so the user can reach all input fields and the submit/save button regardless of screen height. Remove any CSS that clips or hides overflow on the admin page container or form dialogs.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-audit-the-addproduct-mutation-in-frontend-src-hooks-usequeries-ts-verify-the-mutation-function-correctly-calls-the-backend-actor-s-addproduct-or-equivalent-endpoint-passes-all-required-arguments-with-correct-types-especially-bigint-for-price-awaits-the-result-and-invalidates-the-correct-react-query-cache-keys-e-g-products-productsbycategory-on-success-so-the-storefront-re-fetches-and-displays-the-newly-added-product",
+      "title": "Audit the `addProduct` mutation in `frontend/src/hooks/useQueries.ts`: verify the mutation function correctly calls the backend actor's `addProduct` (or equivalent) endpoint, passes all required arguments with correct types (especially BigInt for price), awaits the result, and invalidates the correct React Query cache keys (e.g., 'products', 'productsByCategory') on success so the storefront re-fetches and displays the newly added product.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-frontend-src-pages-adminpage-tsx-verify-that-the-productform-onsubmit-handler-correctly-invokes-the-addproduct-mutation-from-usequeries-ts-waits-for-it-to-complete-closes-the-dialog-modal-and-shows-a-success-or-error-feedback-message-to-the-user-ensure-no-silent-failures-occur-e-g-errors-caught-and-swallowed-without-notification",
+      "title": "In `frontend/src/pages/AdminPage.tsx`, verify that the ProductForm `onSubmit` handler correctly invokes the `addProduct` mutation (from `useQueries.ts`), waits for it to complete, closes the dialog/modal, and shows a success or error feedback message to the user. Ensure no silent failures occur (e.g., errors caught and swallowed without notification).",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-frontend-src-pages-storepage-tsx-confirm-that-the-product-grid-re-fetches-or-reads-from-the-react-query-cache-correctly-after-a-product-is-added-so-the-new-product-appears-immediately-without-requiring-a-manual-page-reload",
+      "title": "In `frontend/src/pages/StorePage.tsx`, confirm that the product grid re-fetches or reads from the React Query cache correctly after a product is added so the new product appears immediately without requiring a manual page reload.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-simulated-order-placement-in-frontend-src-pages-checkoutpage-tsx-with-a-multi-step-checkout-flow-before-showing-the-order-summary-display-a-customer-details-form-with-fields-for-full-name-email-address-phone-number-and-delivery-address-street-city-postcode-all-fields-are-required-on-form-submission-validate-inputs-and-then-call-the-backend-placeorder-mutation-passing-both-the-cart-contents-and-the-customer-details-on-success-clear-the-cart-and-show-a-confirmation-screen-with-the-order-details-and-a-message-that-it-will-be-delivered-to-the-provided-address",
+      "title": "Replace the simulated order placement in `frontend/src/pages/CheckoutPage.tsx` with a multi-step checkout flow. Before showing the order summary, display a customer details form with fields for: Full Name, Email Address, Phone Number, and Delivery Address (street, city, postcode). All fields are required. On form submission, validate inputs and then call the backend `placeOrder` mutation passing both the cart contents and the customer details. On success, clear the cart and show a confirmation screen with the order details and a message that it will be delivered to the provided address.",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-placeorder-mutation-hook-and-a-getorders-query-hook-to-frontend-src-hooks-usequeries-ts-the-placeorder-mutation-must-call-the-backend-placeorder-function-with-customer-details-and-cart-item-data-await-the-result-and-invalidate-the-orders-cache-key-on-success-the-getorders-query-must-call-the-backend-getorders-function-and-return-the-list-of-all-orders",
+      "title": "Add a `placeOrder` mutation hook and a `getOrders` query hook to `frontend/src/hooks/useQueries.ts`. The `placeOrder` mutation must call the backend `placeOrder` function with customer details and cart item data, await the result, and invalidate the `orders` cache key on success. The `getOrders` query must call the backend `getOrders` function and return the list of all orders.",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-orders-tab-to-the-admin-panel-in-frontend-src-pages-adminpage-tsx-alongside-the-existing-products-and-sponsors-tabs-this-tab-must-display-a-list-of-all-placed-orders-fetched-via-the-getorders-query-for-each-order-show-order-id-number-customer-name-email-phone-full-delivery-address-a-line-item-list-of-products-ordered-with-quantities-and-prices-the-order-total-and-the-order-date-time-style-the-orders-list-consistently-with-the-existing-dark-gaming-admin-theme-the-tab-must-be-visible-and-accessible-after-the-admin-password-gate-is-passed",
+      "title": "Add an 'Orders' tab to the Admin Panel in `frontend/src/pages/AdminPage.tsx` (alongside the existing Products and Sponsors tabs). This tab must display a list of all placed orders fetched via the `getOrders` query. For each order show: order ID/number, customer name, email, phone, full delivery address, a line-item list of products ordered with quantities and prices, the order total, and the order date/time. Style the orders list consistently with the existing dark gaming admin theme. The tab must be visible and accessible after the admin password gate is passed.",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Left-side navigation with buttons: Games, Controllers, Sponsors, Accessories",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Admin panel to add/manage sponsors, consoles, and other store items",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Full store website layout with product pages and branding for 'The Gaming Company™'",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Admin panel password protection with password '6280'",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "When a popular console/game name is entered in the admin panel, auto-populate relevant details (image, description, etc.) for that product",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Ensure the Motoko backend actor exposes stable, correctly typed query and update endpoints that match what the frontend's useQueries.ts hooks expect (e.g., getProductsByCategory, getAllSponsors, addProduct, deleteProduct, etc.). Fix any mismatches between backend function signatures and frontend actor call sites that would cause silent failures or crashes.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Move navigation buttons to the side (sidebar), place admin panel link at the bottom of the sidebar as a gear icon (⚙️), and correct branding to 'The Gaming Company™' (not 'Gaming Store')",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Make the sidebar navigation buttons (Games, Controllers, Sponsors, Accessories) functional so they navigate/filter to the correct sections, and ensure the admin panel is visible and accessible",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Make the page/form scrollable so the user can scroll to add items (likely in the admin panel product form)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Audit `backend/main.mo` to ensure the `addProduct` update function accepts the correct parameter types, stores the product in stable state, and returns a result the frontend can handle. Verify the function signature matches exactly what `useQueries.ts` calls, including field names, types, and any variant/enum representations for category.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "At checkout, show a form asking for customer details (name, address, contact info) so the order can be fulfilled. Display submitted orders in the admin panel so admins can see and process them.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Extend the backend `main.mo` to store customer orders with delivery details. Add an `Order` type (or extend the existing one) that includes: customer full name, email address, phone number, delivery address, list of ordered items (product name, quantity, unit price), order total, and a timestamp. Add an `placeOrder` update function that accepts cart items plus customer details and persists the order. Add a `getOrders` query function that returns all stored orders. Ensure data persists across upgrades using stable storage.",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "The Gaming Company™",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

@@ -1,0 +1,74 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-26T01:01:29.612Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 4,
+    "implemented": 3,
+    "items": [
+      {
+        "id": "REQ-20",
+        "summary": "Extend the backend `main.mo` to store customer orders with delivery details. Add an `Order` type (or extend the existing one) that includes: customer full name, email address, phone number, delivery address, list of ordered items (product name, quantity, unit price), order total, and a timestamp. Add an `placeOrder` update function that accepts cart items plus customer details and persists the order. Add a `getOrders` query function that returns all stored orders. Ensure data persists across upgrades using stable storage.",
+        "status": "unknown",
+        "plannedFiles": [],
+        "matchedFiles": []
+      },
+      {
+        "id": "REQ-21",
+        "summary": "Replace the simulated order placement in `frontend/src/pages/CheckoutPage.tsx` with a multi-step checkout flow. Before showing the order summary, display a customer details form with fields for: Full Name, Email Address, Phone Number, and Delivery Address (street, city, postcode). All fields are required. On form submission, validate inputs and then call the backend `placeOrder` mutation passing both the cart contents and the customer details. On success, clear the cart and show a confirmation screen with the order details and a message that it will be delivered to the provided address.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/CheckoutPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/CheckoutPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-22",
+        "summary": "Add a `placeOrder` mutation hook and a `getOrders` query hook to `frontend/src/hooks/useQueries.ts`. The `placeOrder` mutation must call the backend `placeOrder` function with customer details and cart item data, await the result, and invalidate the `orders` cache key on success. The `getOrders` query must call the backend `getOrders` function and return the list of all orders.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/useQueries.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/useQueries.ts"
+        ]
+      },
+      {
+        "id": "REQ-23",
+        "summary": "Add an 'Orders' tab to the Admin Panel in `frontend/src/pages/AdminPage.tsx` (alongside the existing Products and Sponsors tabs). This tab must display a list of all placed orders fetched via the `getOrders` query. For each order show: order ID/number, customer name, email, phone, full delivery address, a line-item list of products ordered with quantities and prices, the order total, and the order date/time. Style the orders list consistently with the existing dark gaming admin theme. The tab must be visible and accessible after the admin password gate is passed.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/AdminPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/AdminPage.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/backend.d.ts",
+    "frontend/src/backend.ts",
+    "frontend/src/declarations/backend.did.d.ts",
+    "frontend/src/declarations/backend.did.js",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/pages/AdminPage.tsx",
+    "frontend/src/pages/CheckoutPage.tsx",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

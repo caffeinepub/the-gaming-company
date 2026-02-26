@@ -1,0 +1,63 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Checkout customer details form and admin orders view",
+  "requirements": [
+    {
+      "id": "REQ-21",
+      "summary": "Replace simulated checkout with a multi-step flow that collects customer details (name, email, phone, delivery address), validates all required fields, calls the backend placeOrder mutation, and shows a confirmation screen on success",
+      "acceptanceCriteria": [
+        "Clicking 'Proceed to Checkout' from the cart navigates to a customer details form.",
+        "The form includes fields for Full Name, Email, Phone Number, Street Address, City, and Postcode.",
+        "All fields are required; the form shows inline validation errors if any field is empty on submit.",
+        "On successful submission, the backend `placeOrder` function is called with cart items and customer details.",
+        "On success, the cart is cleared and a confirmation screen is shown displaying the delivery address.",
+        "On error, an error message is displayed and the form remains editable.",
+        "The form and confirmation screen follow the existing dark gaming visual theme."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/CheckoutPage.tsx",
+          "operation": "modify",
+          "description": "Replace the simulated order placement with a multi-step checkout flow. Add a customer details form with required fields for Full Name, Email Address, Phone Number, Street Address, City, and Postcode. Implement inline validation for all required fields. On form submission, call the usePlaceOrder mutation hook with both cart items and customer details. On success, clear the cart via CartContext and display a confirmation screen showing the delivery address and order details. On error, display an error message while keeping the form editable. Maintain the existing dark gaming theme and neon-red accents throughout the form and confirmation views."
+        }
+      ]
+    },
+    {
+      "id": "REQ-22",
+      "summary": "Add usePlaceOrder mutation hook and useOrders query hook to handle placing orders and fetching all orders from the backend, with proper cache invalidation and BigInt serialization",
+      "acceptanceCriteria": [
+        "`useOrders` query hook fetches all orders from the backend via `getOrders`.",
+        "`usePlaceOrder` mutation hook calls the backend `placeOrder` function with the correct argument types.",
+        "On mutation success, the `orders` React Query cache key is invalidated so the admin panel re-fetches.",
+        "Price/BigInt fields are serialised correctly when passed to the backend."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useQueries.ts",
+          "operation": "modify",
+          "description": "Add a useOrders query hook that calls actor.getOrders() and returns the array of BackendOrder objects with proper type mapping. Add a usePlaceOrder mutation hook that accepts customer details (fullName, email, phoneNumber, address) and an array of order items, calls actor.placeOrder with the correct argument order matching the backend interface signature, and invalidates the 'orders' query key on success. Ensure BigInt values (quantities, prices, totals) are properly serialized when passed to the backend. Follow the existing pattern used by useProducts and useSponsors hooks for consistency."
+        }
+      ]
+    },
+    {
+      "id": "REQ-23",
+      "summary": "Add an 'Orders' tab to the Admin Panel that displays all placed orders with customer details, delivery address, line items, totals, and timestamps, visible only after the password gate",
+      "acceptanceCriteria": [
+        "An 'Orders' tab appears in the Admin Panel alongside Products and Sponsors tabs.",
+        "The Orders tab is only visible after passing the PIN '6280' password gate.",
+        "Each order card/row shows: customer name, email, phone, delivery address, ordered items with quantities and prices, total, and timestamp.",
+        "If no orders exist, a friendly empty-state message is displayed.",
+        "The orders list is scrollable and follows the existing dark gaming visual theme.",
+        "Orders data is fetched live from the backend using the `getOrders` query hook."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/AdminPage.tsx",
+          "operation": "modify",
+          "description": "Add an 'Orders' tab to the existing tab navigation alongside Products and Sponsors. The Orders tab must only be visible after the PIN '6280' password gate is passed. Use the useOrders query hook to fetch all orders from the backend. Display each order as a card or list item showing: customer full name, email address, phone number, complete delivery address, a line-item breakdown of ordered products with quantities and unit prices, the order total, and the order timestamp formatted as a readable date/time. If no orders exist, show a friendly empty-state message. Style the orders view consistently with the existing dark gaming admin theme using neon-red accents and card hover effects. Ensure the orders list is scrollable and handles loading and error states appropriately."
+        }
+      ]
+    }
+  ]
+}

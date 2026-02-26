@@ -1,0 +1,45 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-26T01:01:29.609Z",
+  "summary": "The diff implements all four requirements (REQ-20 through REQ-23) with good coverage. The backend adds Order types, placeOrder, and getOrders with stable storage via migration.mo. The frontend adds useOrders and usePlaceOrder hooks, a multi-step CheckoutPage with validation, and an Orders tab in AdminPage. A few minor gaps exist around order IDs not being embedded in the BackendOrder type returned by getOrders.",
+  "missing_requirements": [
+    {
+      "id": "REQ-20",
+      "requirement": "Each order record includes an order ID so it can be identified and returned.",
+      "reason": "The BackendOrder type in main.mo does not include an id field. The placeOrder function returns the assigned Nat id, but getOrders returns [BackendOrder] without embedding the id inside each record, so callers cannot associate an order with its id.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-23",
+      "requirement": "Each order card/row shows an order ID/number.",
+      "reason": "Because BackendOrder does not carry an id field, the Orders tab in AdminPage cannot display a meaningful order ID or number for each order card.",
+      "evidence": [
+        "frontend/src/pages/AdminPage.tsx",
+        "backend/main.mo"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "BackendOrder includes legacy fields quantity (aggregate item count) and paymentMethod (hardcoded to euro) that were not requested.",
+      "reason": "The requirements specify the order should contain customer details, items, total, and timestamp only. The additional quantity aggregate and paymentMethod fields were not part of the spec.",
+      "evidence": [
+        "backend/main.mo",
+        "backend/migration.mo"
+      ]
+    }
+  ],
+  "confidence": 0.82,
+  "changed_files": [
+    "backend/main.mo",
+    "backend/migration.mo",
+    "frontend-file-summaries.txt",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/pages/AdminPage.tsx",
+    "frontend/src/pages/CheckoutPage.tsx",
+    "project_state.json"
+  ]
+}

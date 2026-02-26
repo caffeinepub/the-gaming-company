@@ -1,0 +1,107 @@
+{
+  "kind": "build_request",
+  "title": "Checkout customer details form and admin orders view",
+  "projectName": "The Gaming Company",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-20",
+      "text": "Extend the backend `main.mo` to store customer orders with delivery details. Add an `Order` type (or extend the existing one) that includes: customer full name, email address, phone number, delivery address, list of ordered items (product name, quantity, unit price), order total, and a timestamp. Add an `placeOrder` update function that accepts cart items plus customer details and persists the order. Add a `getOrders` query function that returns all stored orders. Ensure data persists across upgrades using stable storage.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-recent-1"
+        ],
+        "quotes": [
+          "when you proceed checkout it asks for your details so we can get it to you",
+          "put in the admin panel a thing so we can see it and get it to you"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend exposes a `placeOrder` update function accepting customer details (name, email, phone, address) and cart items.",
+        "Backend exposes a `getOrders` query function returning all placed orders.",
+        "Orders persist across canister upgrades via stable storage.",
+        "Each order record includes customer name, email, phone, delivery address, ordered items, total price, and a creation timestamp."
+      ]
+    },
+    {
+      "id": "REQ-21",
+      "text": "Replace the simulated order placement in `frontend/src/pages/CheckoutPage.tsx` with a multi-step checkout flow. Before showing the order summary, display a customer details form with fields for: Full Name, Email Address, Phone Number, and Delivery Address (street, city, postcode). All fields are required. On form submission, validate inputs and then call the backend `placeOrder` mutation passing both the cart contents and the customer details. On success, clear the cart and show a confirmation screen with the order details and a message that it will be delivered to the provided address.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-recent-1"
+        ],
+        "quotes": [
+          "when you proceed checkout it asks for your details so we can get it to you"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Clicking 'Proceed to Checkout' from the cart navigates to a customer details form.",
+        "The form includes fields for Full Name, Email, Phone Number, Street Address, City, and Postcode.",
+        "All fields are required; the form shows inline validation errors if any field is empty on submit.",
+        "On successful submission, the backend `placeOrder` function is called with cart items and customer details.",
+        "On success, the cart is cleared and a confirmation screen is shown displaying the delivery address.",
+        "On error, an error message is displayed and the form remains editable.",
+        "The form and confirmation screen follow the existing dark gaming visual theme."
+      ]
+    },
+    {
+      "id": "REQ-22",
+      "text": "Add a `placeOrder` mutation hook and a `getOrders` query hook to `frontend/src/hooks/useQueries.ts`. The `placeOrder` mutation must call the backend `placeOrder` function with customer details and cart item data, await the result, and invalidate the `orders` cache key on success. The `getOrders` query must call the backend `getOrders` function and return the list of all orders.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-recent-1"
+        ],
+        "quotes": [
+          "make it so when you proceed checkout it asks for your details so we can get it to you"
+        ]
+      },
+      "acceptanceCriteria": [
+        "`useOrders` query hook fetches all orders from the backend via `getOrders`.",
+        "`usePlaceOrder` mutation hook calls the backend `placeOrder` function with the correct argument types.",
+        "On mutation success, the `orders` React Query cache key is invalidated so the admin panel re-fetches.",
+        "Price/BigInt fields are serialised correctly when passed to the backend."
+      ]
+    },
+    {
+      "id": "REQ-23",
+      "text": "Add an 'Orders' tab to the Admin Panel in `frontend/src/pages/AdminPage.tsx` (alongside the existing Products and Sponsors tabs). This tab must display a list of all placed orders fetched via the `getOrders` query. For each order show: order ID/number, customer name, email, phone, full delivery address, a line-item list of products ordered with quantities and prices, the order total, and the order date/time. Style the orders list consistently with the existing dark gaming admin theme. The tab must be visible and accessible after the admin password gate is passed.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-recent-1"
+        ],
+        "quotes": [
+          "put in the admin panel a thing so we can see it and get it to you"
+        ]
+      },
+      "acceptanceCriteria": [
+        "An 'Orders' tab appears in the Admin Panel alongside Products and Sponsors tabs.",
+        "The Orders tab is only visible after passing the PIN '6280' password gate.",
+        "Each order card/row shows: customer name, email, phone, delivery address, ordered items with quantities and prices, total, and timestamp.",
+        "If no orders exist, a friendly empty-state message is displayed.",
+        "The orders list is scrollable and follows the existing dark gaming visual theme.",
+        "Orders data is fetched live from the backend using the `getOrders` query hook."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not modify files listed under frontend.immutablePaths.",
+    "Password validation for the admin panel must remain frontend-only (PIN '6280').",
+    "All Motoko logic must remain in the single actor in backend/main.mo.",
+    "Generate or update migration.mo if stable state types change due to order storage additions."
+  ],
+  "nonGoals": [
+    "Payment processing or integration with any payment gateway.",
+    "Email confirmation or notification sending.",
+    "User authentication for customers (orders are anonymous/guest).",
+    "Order status updates or fulfilment tracking beyond storing the order.",
+    "Deleting or editing existing orders from the admin panel."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-replace-the-simulated-order-placement-in-frontend-src-pages-checkoutpage-tsx-with-a-multi-step-checkout-flow-before-showing-the-order-summary-display-a-customer-details-form-with-fields-for-full-name-email-address-phone-number-and-delivery-address-street-city-postcode-all-fields-are-required-on-form-submission-validate-inputs-and-then-call-the-backend-placeorder-mutation-passing-both-the-cart-contents-and-the-customer-details-on-success-clear-the-cart-and-show-a-confirmation-screen-with-the-order-details-and-a-message-that-it-will-be-delivered-to-the-provided-address",
+      "featureTitle": "Replace the simulated order placement in `frontend/src/pages/CheckoutPage.tsx` with a multi-step checkout flow. Before showing the order summary, display a customer details form with fields for: Full Name, Email Address, Phone Number, and Delivery Address (street, city, postcode). All fields are required. On form submission, validate inputs and then call the backend `placeOrder` mutation passing both the cart contents and the customer details. On success, clear the cart and show a confirmation screen with the order details and a message that it will be delivered to the provided address.",
+      "files": [
+        "frontend/src/pages/CheckoutPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-21"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-placeorder-mutation-hook-and-a-getorders-query-hook-to-frontend-src-hooks-usequeries-ts-the-placeorder-mutation-must-call-the-backend-placeorder-function-with-customer-details-and-cart-item-data-await-the-result-and-invalidate-the-orders-cache-key-on-success-the-getorders-query-must-call-the-backend-getorders-function-and-return-the-list-of-all-orders",
+      "featureTitle": "Add a `placeOrder` mutation hook and a `getOrders` query hook to `frontend/src/hooks/useQueries.ts`. The `placeOrder` mutation must call the backend `placeOrder` function with customer details and cart item data, await the result, and invalidate the `orders` cache key on success. The `getOrders` query must call the backend `getOrders` function and return the list of all orders.",
+      "files": [
+        "frontend/src/hooks/useQueries.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-22"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-an-orders-tab-to-the-admin-panel-in-frontend-src-pages-adminpage-tsx-alongside-the-existing-products-and-sponsors-tabs-this-tab-must-display-a-list-of-all-placed-orders-fetched-via-the-getorders-query-for-each-order-show-order-id-number-customer-name-email-phone-full-delivery-address-a-line-item-list-of-products-ordered-with-quantities-and-prices-the-order-total-and-the-order-date-time-style-the-orders-list-consistently-with-the-existing-dark-gaming-admin-theme-the-tab-must-be-visible-and-accessible-after-the-admin-password-gate-is-passed",
+      "featureTitle": "Add an 'Orders' tab to the Admin Panel in `frontend/src/pages/AdminPage.tsx` (alongside the existing Products and Sponsors tabs). This tab must display a list of all placed orders fetched via the `getOrders` query. For each order show: order ID/number, customer name, email, phone, full delivery address, a line-item list of products ordered with quantities and prices, the order total, and the order date/time. Style the orders list consistently with the existing dark gaming admin theme. The tab must be visible and accessible after the admin password gate is passed.",
+      "files": [
+        "frontend/src/pages/AdminPage.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-23"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
